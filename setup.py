@@ -12,7 +12,6 @@ setup(name='django-plugins',
       url='https://bitbucket.org/sirex/django-plugins',
       license='LGPL',
       description='django-plugins.',
-      long_description=open('README.rst').read(),
       classifiers = [
           'Development Status :: 5 - Production/Stable',
           'Environment :: Web Environment',
