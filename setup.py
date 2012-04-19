@@ -1,6 +1,6 @@
 from setuptools import setup, find_packages
 
-setup(name='django-plugins',
+setup(name='adlibre-plugins',
       version='0.1',
       author='Mantas Zimnickas',
       author_email='sirexas@gmail.com',
@@ -11,7 +11,7 @@ setup(name='django-plugins',
       ],
       url='https://bitbucket.org/sirex/django-plugins',
       license='LGPL',
-      description='django-plugins.',
+      description='adlibre-plugins.',
       classifiers = [
           'Development Status :: 5 - Production/Stable',
           'Environment :: Web Environment',
