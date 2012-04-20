@@ -17,9 +17,9 @@ class MyPlugin(MyPluginPoint):
 class SimpleTest(TestCase):
     def test_plugin_sync(self):
         points = PluginPoint.objects.filter(
-                        name='plugins.tests.MyPluginPoint')
+                        name='djangoplugins.tests.MyPluginPoint')
         plugins = Plugin.objects.filter(
-                        name='plugins.tests.MyPlugin')
+                        name='djangoplugins.tests.MyPlugin')
 
         # At first there should not be any plugins in database
         self.assertEqual(points.count(), 0)
