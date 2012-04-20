@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(name='adlibre-plugins',
-      version='0.1',
+      version='0.1.1',
       author='Mantas Zimnickas',
       author_email='sirexas@gmail.com',
       packages=find_packages(),

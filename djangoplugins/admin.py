@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from plugins.models import PluginPoint, Plugin
+from djangoplugins.models import PluginPoint, Plugin
 
 
 class PluginPointAdmin(admin.ModelAdmin):

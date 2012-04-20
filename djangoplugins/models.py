@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
-from plugins.utils import get_plugin_name, get_plugin_from_string
+from djangoplugins.utils import get_plugin_name, get_plugin_from_string
 
 ENABLED = 0
 DISABLED = 1

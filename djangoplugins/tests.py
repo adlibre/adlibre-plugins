@@ -1,9 +1,9 @@
 from django.test import TestCase
 
-from plugins import PluginMount
-from plugins.models import Plugin, PluginPoint
-from plugins.models import ENABLED, REMOVED
-from plugins.management.commands.syncplugins import SyncPlugins
+from djangoplugins import PluginMount
+from djangoplugins.models import Plugin, PluginPoint
+from djangoplugins.models import ENABLED, REMOVED
+from djangoplugins.management.commands.syncplugins import SyncPlugins
 
 
 class MyPluginPoint:
