@@ -1,3 +1,7 @@
+Changes in current fork state
+--------------------
+No difference from 0.2.3
+
 Changes in this fork
 
 * Fix installer error

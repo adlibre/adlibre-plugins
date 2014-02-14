@@ -1,7 +1,7 @@
 from django.db.models.signals import post_syncdb
 
 from djangoplugins import models as plugins_app
-from djangoplugins.management.commands.syncplugins import SyncPlugins
+from .commands.syncplugins import SyncPlugins
 
 
 def sync_plugins(sender, verbosity, **kwargs):

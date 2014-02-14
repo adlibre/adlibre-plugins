@@ -2,8 +2,8 @@ from optparse import make_option
 
 from django.core.management.base import NoArgsCommand
 
-from djangoplugins import PluginMount
-from djangoplugins.utils import get_plugin_name
+from djangoplugins.point import PluginMount
+from djangoplugins.utils import get_plugin_name, load_plugins
 from djangoplugins.models import Plugin, PluginPoint, REMOVED, ENABLED
 
 
@@ -34,6 +34,7 @@ class SyncPlugins():
     """
 
     def __init__(self, delete_removed=False, verbosity=1):
+        load_plugins()
         self.delete_removed = delete_removed
         self.verbosity = verbosity
 
@@ -45,7 +46,7 @@ class SyncPlugins():
         return dict([(get_plugin_name(i), i) for i in classes])
 
     def get_instances_dict(self, qs):
-        return dict((i.name, i) for i in qs)
+        return dict((i.pythonpath, i) for i in qs)
 
     def available(self, src, dst, model):
         """
@@ -57,7 +58,7 @@ class SyncPlugins():
             if inst is None:
                 self.print_(1, "Registering %s for %s" % (model.__name__,
                                                             name))
-                inst = model(name=name)
+                inst = model(pythonpath=name)
             if inst.status == REMOVED:
                 self.print_(1, "Updating %s for %s" % (model.__name__, name))
                 # re-enable a previously removed plugin point and its plugins
@@ -85,6 +86,10 @@ class SyncPlugins():
         dst = self.get_instances_dict(PluginPoint.objects.all())
 
         for point, inst in self.available(src, dst, PluginPoint):
+            if hasattr(point, '_title'):
+                inst.title = point._title
+            else:
+                inst.title = inst.pythonpath.split('.')[-1]
             inst.save()
             self.plugins(point, inst)
 
@@ -97,8 +102,11 @@ class SyncPlugins():
         src = self.get_classes_dict(point.plugins)
         dst = self.get_instances_dict(point_inst.plugin_set.all())
 
-        for point, inst in self.available(src, dst, Plugin):
+        for plugin, inst in self.available(src, dst, Plugin):
             inst.point = point_inst
+            inst.name = getattr(plugin, 'name', None)
+            if hasattr(plugin, 'title'):
+                inst.title = unicode(getattr(plugin, 'title'))
             inst.save()
 
         self.missing(dst)
